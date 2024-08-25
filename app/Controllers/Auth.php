@@ -34,8 +34,9 @@ class Auth extends Controller
                     'email' => $this->request->getPost('email'),
                     'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
                 ]);
-                // Redirect to the welcome page after successful registration
-                return redirect()->to('/welcome');
+                
+                
+                return redirect()->to('/welcome'); //to welcome page for logging out
             }
         }
         return view('auth/register', $data);
@@ -56,7 +57,6 @@ class Auth extends Controller
                 $user = $this->userModel->getUserByUsername($this->request->getPost('username'));
                 if ($user && password_verify($this->request->getPost('password'), $user['password'])) {
                     $this->setUserSession($user);
-                    // Redirect to the welcome page after successful login
                     return redirect()->to('/welcome');
                 } else {
                     $data['validation'] = ['password' => 'Invalid username or password'];

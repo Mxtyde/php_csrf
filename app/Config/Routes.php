@@ -5,10 +5,14 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Auth::register');  // Redirect root to the registration page
+$routes->get('/', 'Auth::register');  
 
-$routes->match(['get', 'post'], 'auth/register', 'Auth::register');  // Handle both GET and POST requests for registration
-$routes->match(['get', 'post'], 'auth/login', 'Auth::login');  // Handle both GET and POST requests for login
-$routes->get('auth/logout', 'Auth::logout');  // Logout route
+$routes->match(['get', 'post'], 'auth/register', 'Auth::register'); 
 
-$routes->get('welcome', 'Auth::welcome');  // Route to the welcome page
+$routes->match(['get', 'post'], 'auth/login', 'Auth::login');  
+
+$routes->get('auth/logout', 'Auth::logout');  
+
+// $routes->get('welcome', 'Auth::welcome');
+
+$routes->get('welcome', 'Auth::welcome', ['filter' => 'auth']);
